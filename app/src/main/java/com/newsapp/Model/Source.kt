@@ -1,4 +1,4 @@
-package com.newsapp
+package com.newsapp.Model
 
 data class Source(
     val id: String,

@@ -1,4 +1,4 @@
-package com.newsapp
+package com.newsapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,10 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.newsapp.API.API
+import com.newsapp.Model.News
+import com.newsapp.Adapter.NewsAdaptor
+import com.newsapp.R
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
     private val newsList = mutableListOf<News>()

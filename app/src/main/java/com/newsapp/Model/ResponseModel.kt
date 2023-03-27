@@ -1,4 +1,4 @@
-package com.newsapp
+package com.newsapp.Model
 
 class ResponseModel(
     var status: String,

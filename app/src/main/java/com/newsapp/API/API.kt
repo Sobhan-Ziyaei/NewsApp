@@ -1,5 +1,6 @@
-package com.newsapp
+package com.newsapp.API
 
+import com.newsapp.Model.ResponseModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
