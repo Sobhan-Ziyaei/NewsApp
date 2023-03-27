@@ -1,6 +1,7 @@
 package com.newsapp
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,7 @@ import com.bumptech.glide.Glide
 class NewsAdaptor(var newsList: MutableList<News>, var context: Context) :
     RecyclerView.Adapter<NewsAdaptor.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView
         val description: TextView
         val dateAndWriter: TextView
@@ -26,10 +27,13 @@ class NewsAdaptor(var newsList: MutableList<News>, var context: Context) :
                 description = findViewById(R.id.descriptionText)
                 dateAndWriter = findViewById(R.id.dateAndWriterText)
                 image = findViewById(R.id.imageView)
+                title.setOnClickListener {
+                    val intent = Intent(context, WebPageActivity::class.java)
+                    intent.putExtra("url", newsList[adapterPosition].url)
+                    context.startActivity(intent)
+                }
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -41,7 +45,7 @@ class NewsAdaptor(var newsList: MutableList<News>, var context: Context) :
         holder.apply {
             title.text = newsList[position].title
             description.text = newsList[position].description
-            dateAndWriter.text = newsList[position].publishedAt + " " + newsList[position].author
+            dateAndWriter.text = newsList[position].publishedAt + "\n" + newsList[position].author
             Glide.with(context).load(newsList[position].urlToImage).into(image)
         }
     }
@@ -50,3 +54,5 @@ class NewsAdaptor(var newsList: MutableList<News>, var context: Context) :
         return newsList.size
     }
 }
+
+
