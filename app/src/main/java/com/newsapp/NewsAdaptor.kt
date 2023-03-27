@@ -1,5 +1,6 @@
 package com.newsapp
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.LayoutInflaterCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
-//هر زمان یک Recycler View ساختیم نیاز به دو کلاس Adaptor و ViewHolder داریم
-class NewsAdaptor(var newsList: MutableList<News>) :
+class NewsAdaptor(var newsList: MutableList<News>, var context: Context) :
     RecyclerView.Adapter<NewsAdaptor.ViewHolder>() {
-    //ViewHolder -> inner Class and extends RecyclerView.ViewHolder(view)
-    //وظیفه کلاس viewHolder این است که مواردی را که در Recycler View تعریف کردیم را مقداردهی یا initialize بکند
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView
@@ -20,7 +19,7 @@ class NewsAdaptor(var newsList: MutableList<News>) :
         val dateAndWriter: TextView
         val image: ImageView
 
-        //هر کلاسی در کاتلین دستوری به نام init دارد این دستور زمانی که ما آبجکت از کلاس بسازیم یکبار اجرا میشود و موارد داخل بلاکش را فرا میخواند
+
         init {
             view.apply {
                 title = findViewById(R.id.titleText)
@@ -42,8 +41,8 @@ class NewsAdaptor(var newsList: MutableList<News>) :
         holder.apply {
             title.text = newsList[position].title
             description.text = newsList[position].description
-            dateAndWriter.text = newsList[position].description + " " + newsList[position].writer
-
+            dateAndWriter.text = newsList[position].publishedAt + " " + newsList[position].author
+            Glide.with(context).load(newsList[position].urlToImage).into(image)
         }
     }
 

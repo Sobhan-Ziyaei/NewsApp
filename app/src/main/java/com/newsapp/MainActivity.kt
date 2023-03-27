@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initialRecView() {
         val recView = findViewById<RecyclerView>(R.id.recView)
-        val newsAdapter = NewsAdaptor(newsList)
+        val newsAdapter = NewsAdaptor(newsList,this)
         recView.adapter = newsAdapter
         recView.layoutManager = LinearLayoutManager(this)
     }
